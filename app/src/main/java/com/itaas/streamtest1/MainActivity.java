@@ -2,6 +2,7 @@ package com.itaas.streamtest1;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,18 +22,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EditText editText = (EditText) findViewById(R.id.set_url);
+        editText.setText(Environment.getExternalStorageDirectory()+"/DCIM/Camera/test1.wmv");
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText editText = (EditText) v.getRootView().findViewById(R.id.set_url);
-                Log.w("RANDOM_TAG", editText.toString()+"");
+                Log.w("RANDOM_TAG", editText.toString() + "");
                 String url = editText.getText().toString();
-                playVideo(v.getRootView(),url);
+                playVideo(v.getRootView(), url);
             }
         });
-
 
     }
 
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             public void onPrepared(MediaPlayer mp) {
-                Toast.makeText(getBaseContext(),"Playing",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Playing", Toast.LENGTH_SHORT).show();
                 videoView.start();
             }
         });
